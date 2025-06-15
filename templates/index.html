@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Coming Soon - HJBrand</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<!-- Font Awesome 6.4.0 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<!--  -->
+	<div class="simpleslide100">
+		<div class="simpleslide100-item bg-img1" style="background-image: url('{% static 'images/bg11.png' %}');"></div>
+		<div class="simpleslide100-item bg-img1" style="background-image: url('{% static 'images/bg17.png' %}');"></div>
+		<div class="simpleslide100-item bg-img1" style="background-image: url('{% static 'images/bg13.png' %}');"></div>
+		<div class="simpleslide100-item bg-img1" style="background-image: url('{% static 'images/bg14.png' %}');"></div>
+		<div class="simpleslide100-item bg-img1" style="background-image: url('{% static 'images/bg15.png' %}');"></div>
+		<div class="simpleslide100-item bg-img1" style="background-image: url('{% static 'images/bg16.png' %}');"></div>
+
+		
+	</div>
+
+	<div class="size1 overlay1">
+		<!--  -->
+		<div class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
+			<h3 class="l1-txt1 txt-center p-b-25">
+				A New Era of Elegance is Almost Here
+
+			</h3>
+
+			<p class="m2-txt1 txt-center p-b-48">
+				We’re not just launching a brand — we’re launching a lifestyle.<br>
+Be the first to explore limited drops, premium collections, and exclusive offers.<br>
+The countdown has begun Don’t miss it.
+
+			</p>
+
+			<div class="flex-w flex-c-m cd100 p-b-33">
+				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+					<span class="l2-txt1 p-b-9 days">35</span>
+					<span class="s2-txt1">Days</span>
+				</div>
+
+				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+					<span class="l2-txt1 p-b-9 hours">17</span>
+					<span class="s2-txt1">Hours</span>
+				</div>
+
+				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+					<span class="l2-txt1 p-b-9 minutes">50</span>
+					<span class="s2-txt1">Minutes</span>
+				</div>
+
+				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+					<span class="l2-txt1 p-b-9 seconds">39</span>
+					<span class="s2-txt1">Seconds</span>
+				</div>
+			</div>
+			<p class="m2-txt1 txt-center p-b-16">
+				Drop your email to unlock early&nbsp;access!
+
+			</p>
+			<form id="subscribeForm" class="w-full flex-w flex-c-m validate-form">
+                {% csrf_token %}
+				<div class="wrap-input100 validate-input where1" data-validate="Valid email is required: ex@abc.xyz">
+					<input class="input100 placeholder0 s2-txt2" type="email" name="email" id="email" placeholder="Enter Email Address" required>
+					<span class="focus-input100"></span>
+                    <div id="form-message" class="m-t-10"></div>
+				</div>
+				<button type="submit" class="flex-c-m size3 s2-txt3 how-btn1 trans-04 where1">
+					Subscribe
+				</button>
+			</form>
+            <script>
+            document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const form = this;
+                const formData = new FormData(form);
+                const messageDiv = document.getElementById('form-message');
+                
+                fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.color = data.status === 'success' ? '#4CAF50' : '#f44336';
+                    if (data.status === 'success') {
+                        form.reset();
+                    }
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        messageDiv.textContent = '';
+                    }, 5000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    messageDiv.textContent = 'An error occurred. Please try again.';
+                    messageDiv.style.color = '#f44336';
+                });
+            });
+            </script>
+			<!-- Social Media Icons -->
+			<div class="flex-c-m p-t-30">
+				<a href="https://www.facebook.com/share/1FLrxuGEs7/" target="_blank" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="Facebook">
+					<i class="fa-brands fa-facebook-f"></i>
+				</a>
+				<a href="https://www.instagram.com/hjbrand.official?igsh=NzV5cTRlcjl3N3Iw" target="_blank" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="Instagram">
+					<i class="fa-brands fa-instagram"></i>
+				</a>
+				<a href="https://x.com/Hjbrandofficial?t=FrR5cC7UkCmDzVZ1nPYksg&s=09" target="_blank" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="X">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+						<path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.384L4.323 2.145H2.865l8.875 11.633Z"/>
+					</svg>
+				</a>
+				<a href="https://www.tiktok.com/@hjbrand.official?_t=ZS-8xD4NoIxBwK&_r=1" target="_blank" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="TikTok">
+					<i class="fa-brands fa-tiktok"></i>
+				</a>
+				<a href="https://wa.me/message/XZW6PCEAH5RWA1" target="_blank" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="WhatsApp">
+					<i class="fa-brands fa-whatsapp"></i>
+				</a>
+				<a href="https://www.snapchat.com/add/hjbrandofficial?share_id=pl61LGmMxp0&locale=en-US" target="_blank" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="Snapchat">
+					<i class="fa-brands fa-snapchat"></i>
+				</a>
+				<a href="mailto:Hjbrand.official@gmail.com" class="fs-18 cl0 hov-cl10 trans-04 m-r-20 m-b-5 m-l-20" title="Email Us">
+					<i class="fa-regular fa-envelope"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/countdowntime/moment-timezone.min.js' %}"></script>
+	<script src="{% static 'vendor/countdowntime/moment-timezone-with-data.min.js' %}"></script>
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+	<script>
+		// Check if we have a saved end time in localStorage
+		let endTime = localStorage.getItem('countdownEndTime');
+		
+		// If not, set a new end time (35 days from now)
+		if (!endTime) {
+			const now = new Date();
+			now.setDate(now.getDate() + 35); // 35 days from now
+			now.setHours(18, 0, 0, 0); // Set to 18:00:00
+			endTime = now.getTime();
+			localStorage.setItem('countdownEndTime', endTime);
+		} else {
+			endTime = parseInt(endTime);
+		}
+
+		// Convert to the format expected by the countdown plugin
+		const endDate = new Date(endTime);
+		
+		$('.cd100').countdown100({
+			endtimeYear: endDate.getFullYear(),
+			endtimeMonth: endDate.getMonth() + 1, // Months are 0-based in JS
+			endtimeDate: endDate.getDate(),
+			endtimeHours: endDate.getHours(),
+			endtimeMinutes: endDate.getMinutes(),
+			endtimeSeconds: endDate.getSeconds(),
+			timeZone: ""
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/tilt/tilt.jquery.min.js' %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
